@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 dotenv.config();
 import producRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 // const express=require('express'); we can use this when we will not use es module
 const port = process.env.PORT || 5000;
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", producRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
