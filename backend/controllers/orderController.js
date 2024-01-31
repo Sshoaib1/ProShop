@@ -23,7 +23,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const order = new Order({
       orderItems: orderItems.map((s) => ({
         ...s,
-        product: XMLDocument._id,
+        product: s ? s._id : null,
         _id: undefined,
       })),
 
