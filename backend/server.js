@@ -27,8 +27,10 @@ app.get("/", (req, res) => {
 app.use("/api/products", producRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+// Example route for updating payment status
 
-app.get("api/config/paypal", (req, res) =>
+
+app.get("/api/config/paypal", (req, res) =>
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
 );
 
