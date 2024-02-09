@@ -52,25 +52,22 @@ const ProductEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    
-    const updatedProduct = {
-      productId,
-      name,
-      price,
-      image,
-      brand,
-      category,
-      countInStock,
-      description,
-    };
-
-    const result = await updateProduct(updatedProduct);
-    if (!result.error) {
-      toast.error(result.error);
-    } else {
-      toast.success("Product Updated");
+    try {
+      await updateProduct({
+        productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        description,
+        countInStock,
+      }).unwrap();
+      toast.success("Product updated");
       refetch();
       navigate("/admin/productlist");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -78,10 +75,10 @@ const ProductEditScreen = () => {
     console.log(e.target.files[0]);
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-  
+
     try {
       const res = await uploadProductImage(formData).unwrap();
-      const relativeUrl = res.image.replace(/\\/g, '/');
+      const relativeUrl = res.image.replace(/\\/g, "/");
       const imageUrl = `${relativeUrl}`;
       toast.success(res.message);
       setImage(imageUrl);
@@ -89,8 +86,6 @@ const ProductEditScreen = () => {
       toast.error(err?.data?.message || err.error);
     }
   };
-  
-  
 
   return (
     <>

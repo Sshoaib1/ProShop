@@ -64,7 +64,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.countInStock = countInStock;
 
     const updateProduct = await product.save();
-    res.jason(updateProduct);
+    res.status(200).json(updateProduct);
   } else {
     res.status(404);
     throw new Error("Resource not found");
