@@ -18,6 +18,7 @@ import {
 } from "../slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 import { toast } from "react-toastify";
 import { addToCart } from "../slices/cartSlice";
 // import products from "../products";
@@ -68,7 +69,7 @@ const ProductScreen = () => {
 
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
+      <Link className="btn btn-primary my-3" to="/">
         Go Back
       </Link>
       {isLoading ? (
@@ -77,6 +78,7 @@ const ProductScreen = () => {
         <Message> {error?.data?.message || error.error} </Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={5}>
               {" "}
