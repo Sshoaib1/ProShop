@@ -8,9 +8,12 @@ import Paginate from "../components/Paginate";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 const HomeScreen = () => {
-  const { pageNumber } = useParams();
+  const { pageNumber, keyword } = useParams();
 
-  const { data, isLoading, error } = useGetProductsQuery({ pageNumber });
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  });
   return (
     <>
       {isLoading ? (
@@ -27,9 +30,13 @@ const HomeScreen = () => {
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Products product={product} />
               </Col>
-            ))}
+            ))} 
           </Row>
-          <Paginate pages={data.pages} page={data.page} />
+          <Paginate
+            pages={data.pages}
+            page={data.page}
+            keyword={keyword ? keyword : ""}
+          />
         </>
       )}
     </>
