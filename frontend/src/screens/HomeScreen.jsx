@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import products from "../products";
 import Products from "../components/Products";
 import Paginate from "../components/Paginate";
@@ -16,6 +16,11 @@ const HomeScreen = () => {
   });
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-primary mb-3 mt-1">
+          Go Back
+        </Link>
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -30,7 +35,7 @@ const HomeScreen = () => {
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Products product={product} />
               </Col>
-            ))} 
+            ))}
           </Row>
           <Paginate
             pages={data.pages}
