@@ -17,10 +17,10 @@ router.route("/").get(getProducts).post(protect, admin, createProduct);
 router.get("/top", getTopRatedProducts);
 router
   .route("/:id")
-  .get(getProductById)
+  .get(checkObjectId, getProductById)
   .put(protect, admin, checkObjectId, updateProduct)
-  .delete(protect, admin, deleteProduct);
+  .delete(protect, admin, checkObjectId, deleteProduct);
 
-router.route("/:id/reviews").post(protect, createProductReview);
+router.route("/:id/reviews").post(protect, checkObjectId, createProductReview);
 
 export default router;

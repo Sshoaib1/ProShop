@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
+import { resetCart } from "../slices/cartSlice";
 import { logout } from "../slices/authSlice";
 import SearchBox from "./SearchBox";
 import logo1 from "../assets/logo1.png";
@@ -22,6 +23,7 @@ const Header = () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(resetCart());
       navigate("/login");
     } catch (er) {
       console.log(er);
